@@ -1,45 +1,56 @@
 # Artificial Neural Networks (ANN)
 
-An ANN is a function that given certain input can give you the answer for a given problem. It's composed of artificial neurons that act like little calculators of tiny parts to control the fitting on a given set of data. Each one contributes to the overall result in the output process.
-
-Here is a condesed resume of my learning on basic neural networks concepts.
+An ANN is a function that given certain input can give you the answer for a given problem. It's composed of artificial neurons that act like little calculators of tiny parts to control the fitting on a given set of data. Each one contributes to the overall result in the desired output.
 
 ## Artificial Neuron
 
-It's a mathematical function that takes as arguments _inputs_ $X=\{x_1,x_2,...,x_n\}$, _weights_ of the inputs $W=\{w_1,w_2,...,w_n\}$, a _bias_ $b$ (a value that when is greater makes the neuron more easily to fire the higher value in the output range), and returns a value called $output$ which is between a discrete (usually two) or continous range of values.
+An artificial neuron is a function that takes inputs $X$ and weights $W$ as parameters, computes the sum of the product between each input $x_i$ and weight $w_i$ plus a bias $b$ and uses an activation function $g$ that depends on the previous sum to produce a value that can be used by other neurons in an ANN:
 
-> To **fire** a neuron means to update its output value (process the function)
+$$
+f(X, W) = g\left(\sum{x_iw_i} + \ b\right)
+$$
 
-$$f(X, W, b) = output$$
+There are many artificial neurons and they only differ on the activation function they use. Some of the most commonly used artificial neurons are: perceptron neuron and sigmoid neuron.
 
-The different models of artificial neurons are the same in structure but differ on firing and output range or possible values. The most known artificial neurons are:
+## Activation functions
 
-- Perceptrons
-- Sigmoids.
+Activation functions are mathematical operations to tweak the behavior (output) of a certain artificial neuron. There are several of them, the most commonly used (of the ones I know) are the Step Function, the Sigmoid Function, the Rectified Linear Unit (ReLU) and Softmax.
 
-### Perceptron neuron
+If the network of an ANN contains neurons with linear activation functions the resulting model only can shape linear data. On the other hand, using non-linear activation functions like the Sigmoid or ReLU ones, the model can shape the data by using the correct quantity of layers and the correct amount of neurons on each one
+
+> To represent non linear data an ANN needs at least two hidden layers. Remember each layer can only change a section of the resulting model. That's the reason why you need more than one.
+
+### Rectified Linear Unit (ReLU)
+
+It's the most commonly used activation function and mainly used on hidden layers of an ANN. The reason is more used than the sigmoid function is because it requires small computation to get a result (less than the sigmoid function).
+
+Mathematical representation:
+
+$$ReLU(x)=\Big\{^{x\ \ if\ x >\ 0}_{0\ \  if x \ \leq \ 0}$$
+
+### Step function
 
 Fires a 0 if the sum of the inputs and weights plus the bias is greather than 0, otherwise a 1.
 
-$$f(X,W,b)=\Big\{^{0\ if\ \sum{x_i w_i}\ +\ b\ >\ 0}_{1\ if \sum{x_i w_i}\ +\ b\  \leq \ 0}$$
+$$f(x)=\Big\{^{0\ if\ z +\ b\ >\ 0}_{1\ if \sum{x_i w_i}\ +\ b\  \leq \ 0}$$
 
-### Sigmoid neuron
+### Sigmoid Function
 
-Fires any number from 0 to 1. This kind of values allows you to have a small change in the output from a small change in the input. This differs from the perceptron neuron where a small variation in the input or weights of the neuron produces unexpected and very probably big differences in the output.
+Fires any number from 0 to 1. This kind of values allows you to have a small change in the output from a small change in the input. This differs from the step function where a small variation in the input or weights produces unexpected and very probably big differences in the output.
 
 The output of the sigmoid neuron can be a function called _sigmoid function_ that looks like this:
 
-$$\sigma(z)=\frac{1}{1+e^{-z}}$$
+$$\sigma(x)=\frac{1}{1+e^{-x}}$$
 
-And applied to artificial neurons:
+### Softmax function
 
-$$\sigma\left(\sum w_i x_i+b\right)=\frac{1}{1+e^{-(\sum w_i x_i -b)}}$$
+It's normally used for neurons in the output layer of an ANN to normalize the output of a network to a probability distribution over predicted output classes.
 
-## Linear unite
+$$
+S(Y)=\frac{e^{y_i}}{\sum_{j=1}^{n} e^{y_{j}}}
+$$
 
-It's fast (requires less computation than sigmoid). It's very used in hhidden layers.
-
-$$f(X,W,b)=\Big\{^{x\ if\ \sum{x_i w_i}\ +\ b\ >\ 0}_{1\ if \sum{x_i w_i}\ +\ b\  \leq \ 0}$$
+Where $Y$ is the list of the neuron values of a given layer, $y_i$ and $y_j$ each element on the list and $n$ the quantity of values in the list
 
 ## Neural network training
 
@@ -51,9 +62,9 @@ It is a process of three steps:
 2. Choose a **loss function** and use it to calculate the error between each predicted value.
 3. Update the weights and biases, known as **backpropagation**.
 
-### Feedforward process
+### Feedforward propagation
 
-Feedorward is the firing process of the network. Consists on computing the value of each output neuron (which imples to calculate the output value of the connected neurons).
+The feedforward propagation is the firing process of the network. Consists on computing the value of each output neuron (which imples to calculate the output value of the connected neurons).
 
 **Example**. Mathematically you can represent the feedforward process of a two layer network as follows:
 
@@ -63,28 +74,4 @@ $$
 
 > Here I'm using the _dot_ notation which represents the sum of the weights $W$ and values $X$.
 
-### Loss function
-
-// TODO:
-
-## Weights and biases
-
-The tuning to weights and biases defines the learning process for a NN. This is the straight line equation:
-
-$$y = mx + b$$
-
-You can represent the output of a given neuron like the straight line equation:
-
 $$output = input \cdot weight + bias$$
-
-## Activation functions
-
-- Perceptron
-- Sigmoid. This has an issue referred to the vanishing gradient problem
-- Rectified Linear Unit. It's fast (less computation than sigmoid). It's very used in hidden layers.
-- Softmax. It's very used on classifier model. It's apparently used in the output layers of ReLU hidden layers.
-
-## References
-
-- [How to build your own neural network](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6)
-
