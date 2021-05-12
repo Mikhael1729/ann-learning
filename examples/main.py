@@ -13,7 +13,7 @@ from activation_softmax import ActivationSoftmax
 from nnfs.datasets import spiral_data
 from loss import Loss
 from loss_categorical_crossentropy import CategoricalCrossEntropy
-from backpropagation import backpropagation_example
+from backpropagation import backpropagation_example, optimizer_process
 
 # Allows to matplolib use an interface to show the plots.
 matplotlib.use('Qt5Agg')
@@ -154,6 +154,7 @@ if __name__ == "__main__":
   # test_loss()
   # test_loss_with_softmax()
   # test_accuaracy_with_softmax()
-  backpropagation_example()
+  # backpropagation_example()
+  optimizer_process()
 
 
