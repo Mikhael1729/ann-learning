@@ -28,7 +28,7 @@ Mathematical representation:
 
 $$ReLU(x)=\Big\{^{x\ \ if\ x >\ 0}_{0\ \  if x \ \leq \ 0}$$
 
-### Step function
+### Binary step
 
 Fires a 0 if the sum of the inputs and weights plus the bias is greather than 0, otherwise a 1.
 
